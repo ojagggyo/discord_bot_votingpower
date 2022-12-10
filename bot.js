@@ -22,7 +22,27 @@ client.on('message', message => {
 //        message.channel.send("HELLO!")
 //        //メッセージが送られたチャンネルに HELLO!と送信する
 //    }
-      message.channel.send(message.content);
+    
+      //message.channel.send(message.content);
+    
+    const username = message.content;
+    
+        const dsteem = require('dsteem');
+        const client = new dsteem.Client('https://api.steememory.com');
+        console.log(`username=${username}`);
+        client.database.call('get_accounts', [[username]])
+        .then(result => {
+            let vp = result[0].voting_power + (10000 * ((new Date() - new Date(result[0].last_vote_time + "Z")) / 1000) / 432000);
+            vp = vp / 100;
+            lineclient.replyMessage(event.replyToken,
+                [
+                    {type: 'text', text: `こんにちは、${username}さん`},
+                    {type: 'text', text: `Voting Powerは、${vp.toFixed(1)}です。`},
+                    {type: 'text', text: `https://steemit.com/@${username}/posts`},
+                ]
+           );
+        })
+        .catch(err =>{console.log(err);})
 })
 
 // Discordへの接続
