@@ -33,14 +33,10 @@ client.on('message', message => {
         client.database.call('get_accounts', [[username]])
         .then(result => {
             let vp = result[0].voting_power + (10000 * ((new Date() - new Date(result[0].last_vote_time + "Z")) / 1000) / 432000);
-            vp = vp / 100;
-            lineclient.replyMessage(event.replyToken,
-                [
-                    {type: 'text', text: `こんにちは、${username}さん`},
-                    {type: 'text', text: `Voting Powerは、${vp.toFixed(1)}です。`},
-                    {type: 'text', text: `https://steemit.com/@${username}/posts`},
-                ]
-           );
+            vp = vp / 100;            
+            message.channel.send(`こんにちは、${username}さん`);
+            message.channel.send(`Voting Powerは、${vp.toFixed(1)}です。`);
+            message.channel.send(`https://steemit.com/@${username}/posts`);
         })
         .catch(err =>{console.log(err);})
 })
