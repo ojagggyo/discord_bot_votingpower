@@ -1,5 +1,6 @@
 // discord.js モジュールのインポート
 const Discord = require('discord.js');
+require('dotenv').config();
 
 // Discord Clientのインスタンス作成
 //const client = new Discord.Client();
@@ -7,7 +8,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client({ intents: ["DIRECT_MESSAGES", "GUILD_MESSAGES"] });
 
 // トークンの用意
-const token = 'MTA1MTA3NzA5MTE4MzAzNDM5OA.GWhkj6.uLnExhlu8O1QSW2mfUet2X6NQHw3JqBqdnmnnc';
+const token = process.env.TOKEN;
 
 // 起動するとconsoleにready...と表示される
 client.on('ready', () => {
