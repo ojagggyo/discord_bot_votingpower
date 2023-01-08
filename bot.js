@@ -21,7 +21,8 @@ client.on('message', message => {
     username = username.toLowerCase(); //小文字に変換する
 
         const dsteem = require('dsteem');
-        const client = new dsteem.Client('https://api.steememory.com');
+        //const client = new dsteem.Client('https://api.steememory.com');
+        const client = new dsteem.Client('http://172.100.0.100:8080');
         console.log(`username=${username}`);
         client.database.call('get_accounts', [[username]])
         .then(result => {
