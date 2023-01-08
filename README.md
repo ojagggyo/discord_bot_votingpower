@@ -5,7 +5,4 @@
 
 
 
-npm install discord.js@12.5.3
-
-
-
+npm install discord.js@12.5.3 dotenv dsteem 
